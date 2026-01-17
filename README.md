@@ -174,4 +174,4 @@ CSV export
 [**Made with ❤️**](https://apify.com/johnvc?fpr=9n7kx3)
 
 *Transform your search automation with the most reliable and efficient Fuel and Gasoline price scraper available.*
-Last Updated: 2026.01.16
+Last Updated: 2026.01.17
