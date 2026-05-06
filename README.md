@@ -7,7 +7,8 @@ https://apify.com/johnvc/fuelprices?fpr=9n7kx3
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.7 or higher
+- Python 3.9 or higher
+- [uv](https://docs.astral.sh/uv/) installed (`curl -LsSf https://astral.sh/uv/install.sh | sh`)
 - An Apify account and API key
 
 ### Setup Instructions
@@ -18,44 +19,28 @@ https://apify.com/johnvc/fuelprices?fpr=9n7kx3
    cd Apify-Fuel-Prices-Scraper
    ```
 
-2. **Create a virtual environment (recommended)**
+2. **Install dependencies**
    ```bash
-   # Using venv (Python 3.3+)
-   python -m venv venv
-   
-   # Activate the virtual environment
-   # On macOS/Linux:
-   source venv/bin/activate
-   # On Windows:
-   venv\Scripts\activate
+   uv sync
    ```
+   This creates a `.venv` and installs all dependencies from `uv.lock`.
 
-3. **Install dependencies**
+3. **Configure your API key**
    ```bash
-   # Install from requirements.txt
-   pip install -r requirements.txt
-
-   ```
-
-4. **Configure your API key**
-   ```bash
-   # Copy the example environment file
    cp .env.example .env
-   
    # Edit .env and add your Apify API key
    # Get your API key from: https://apify.com?fpr=9n7kx3
    ```
 
-5. **Run the example**
+4. **Run the example**
    ```bash
-   python fuel-prices-scraper.py
+   uv run fuel-prices-scraper.py
    ```
 
 ### Alternative: Direct API Key Usage
-If you prefer not to use a `.env` file, you can set the environment variable directly:
+If you prefer not to use a `.env` file, you can pass the environment variable inline:
 ```bash
-export APIFY_API_TOKEN="your_api_key_here"
-python fuel-prices-scraper.py
+APIFY_API_TOKEN="your_api_key_here" uv run fuel-prices-scraper.py
 ```
 
 # Fuel Price Scraper
