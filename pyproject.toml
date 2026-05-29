@@ -1,12 +1,13 @@
 [project]
-name = "apify-fuel-prices-scraper"
+name = "apify-fuel-prices-api"
 version = "0.1.0"
-description = "Fuel Prices Scraper using the Apify platform"
-requires-python = ">=3.9"
+description = "Example client for the Fuel Prices API Apify Actor"
+readme = "README.md"
+requires-python = ">=3.11"
 dependencies = [
-    "apify-client>=1.4.0",
+    "apify-client>=3.0.0",
     "python-dotenv>=1.0.0",
 ]
 
 [tool.uv]
-dev-dependencies = []
+package = false

@@ -1,162 +1,285 @@
-https://apify.com/johnvc/fuelprices?fpr=9n7kx3
+# ⛽ Fuel Prices API: Live US Gas Station Prices in Clean JSON
 
-# 🚀 Fuel Prices Scraper
+> The most efficient, reliable, and developer-friendly way to use the Fuel Prices API.
 
-> **The most efficient, reliable, and developer-friendly Fuel Prices scraper**
+**Actor page:** [apify.com/johnvc/fuelprices](https://apify.com/johnvc/fuelprices?fpr=9n7kx3)
+**Input schema:** [apify.com/johnvc/fuelprices/input-schema](https://apify.com/johnvc/fuelprices/input-schema?fpr=9n7kx3)
 
-## 🚀 Quick Start
+The Fuel Prices API returns live, crowd-reported gas station prices and station metadata for any US location (with some Canadian coverage) as clean, structured JSON. Search by ZIP code, city name, or GPS coordinates and get one record per station: name, full address, distance from your search point, cash and credit prices with posting timestamps, price unit, and ratings. Choose the fuel type (regular, midgrade, premium, diesel, E85, or unleaded 88) and filter by data freshness.
+
+## Video Walkthrough
+
+[![Watch the walkthrough](https://img.youtube.com/vi/jREWahDGhJM/maxresdefault.jpg)](https://www.youtube.com/watch?v=jREWahDGhJM)
+
+## Quick Start
 
 ### Prerequisites
-- Python 3.9 or higher
-- [uv](https://docs.astral.sh/uv/) installed (`curl -LsSf https://astral.sh/uv/install.sh | sh`)
-- An Apify account and API key
-
-### Setup Instructions
+- Python 3.11 or higher
+- An Apify account and API key ([get a free key here](https://apify.com?fpr=9n7kx3))
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/johnisanerd/Apify-Fuel-Prices-Scraper.git
    cd Apify-Fuel-Prices-Scraper
    ```
 
-2. **Install dependencies**
+2. **Install dependencies with UV**
    ```bash
+   # Install UV if you do not have it:
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+
+   # Install project dependencies:
    uv sync
    ```
-   This creates a `.venv` and installs all dependencies from `uv.lock`.
 
 3. **Configure your API key**
    ```bash
    cp .env.example .env
    # Edit .env and add your Apify API key
-   # Get your API key from: https://apify.com?fpr=9n7kx3
+   # Get your free API key at: https://apify.com?fpr=9n7kx3
    ```
 
 4. **Run the example**
    ```bash
-   uv run fuel-prices-scraper.py
+   uv run python fuel-prices-scraper.py
    ```
 
-### Alternative: Direct API Key Usage
-If you prefer not to use a `.env` file, you can pass the environment variable inline:
+### Alternative: set the API key directly
 ```bash
-APIFY_API_TOKEN="your_api_key_here" uv run fuel-prices-scraper.py
+export APIFY_API_TOKEN="your_api_key_here"
+uv run python fuel-prices-scraper.py
 ```
 
-# Fuel Price Scraper
+## Why Use This Fuel Prices API?
 
-**Real-time gas station prices and details by ZIP, city, or place name.**
+**Station-level detail.** Each result is one gas station with its name, full address, distance from your search point, cash and credit prices, price unit, and ratings, so you can compare stations directly.
 
-Get current prices and station metadata from data source using a simple, reliable Actor. Designed for quick setup, robust scraping, and clean outputs for analysis or downstream automation.
+**Search any way you like.** Query by ZIP code, city name, or GPS coordinates pasted straight from a map. Coordinates resolve to the nearest area.
 
-The coverage of this app is mostly in the United States, but does include some international locations such as Canada.
+**Fuel-type and freshness controls.** Pick regular, midgrade, premium, diesel, E85, or unleaded 88, and use the freshness filter to keep only recently reported prices.
 
-### What this Actor does
-- **Scrapes live prices** for a location and fuel type
-- **Returns clean station data** (name, address, distance, ratings, cash/credit prices, timestamps)
-- **Exports CSV automatically** with an optional custom filename
+**Pay only for results.** Billing is per station returned, with no setup fee, no subscription, and no charge for runs that return nothing. A typical city or ZIP search costs a couple of cents.
 
-Common use cases:
-- **Price monitoring** across cities/ZIP codes
-- **Competitive analysis** for fuel retail
-- **Data pipelines** feeding dashboards or alerts
+**Easy to automate.** Call it from Python in a few lines, or load it as an MCP tool so assistants like Claude and Cursor can pull live fuel prices for you on demand.
 
-### Features
-- **Simple input**: just provide `search` (ZIP/city).  This is the only mandatory input required.
-- **Fuel selection**: `fuel` numeric code (see Inputs).  This is optional, but the default will be "1" (Regular Gasoline).
-- **Freshness control**: `maxAge` in days.  This is optional, but the default will be "0" (any age).
-- **Localized badges/text**: `lang`.  This is optional, but the default will be "en" (English).
-- **CSV export**: set `output_file`, or we generate a timestamped name.  This is optional, but the default will be a timestamped name.
+## Features
 
-### Quick start
-1) Add the Actor to your Apify account and open it.
-2) Provide minimal input and run.
+### Core Capabilities
+- **Search by ZIP, city, or coordinates** across US locations (some Canadian coverage)
+- **Fuel-type selection**: regular, midgrade, premium, diesel, E85, unleaded 88
+- **Freshness filtering** by maximum data age in days
+- **Cash and credit prices** with per-price posting timestamps
+- **Station metadata**: name, address, distance, ratings
 
-Example minimal input:
+### Data Quality
+- **One record per station** with a stable structure
+- **Cash and credit prices** reported separately, each with a posted time
+- **Full address components** (line 1/2, city, region, postal code)
+- **Distance and ratings** for ranking and comparison
+- **Consistent JSON** shape across every query
+
+## Usage Examples
+
+### Basic Example
+The cheapest way to try the API: one ZIP code, regular fuel.
 ```json
 {
   "search": "11507"
 }
 ```
 
-Example with options:
+### Advanced Example
+A city search for diesel, freshest data only.
 ```json
 {
   "search": "New York, NY",
-  "fuel": 1,
+  "fuel": 4,
   "lang": "en",
-  "maxAge": 0,
-  "output_file": "stations_nyc.csv"
+  "maxAge": 3
 }
 ```
 
-### Input parameters
-- **search** (string, required): Location query such as ZIP, city, or free text (e.g., "11507", "Los Angeles").
-- **fuel** (integer, optional, default: 1): Fuel type code. Current mapping in this Actor UI is: 1 = Regular, 2 = Midgrade, 3 = Premium.
-- **lang** (string, optional, default: "en"): Language code for localized fields.
-- **maxAge** (integer, optional, default: 0): Maximum age of price data in days. Use 0 for the freshest data available.
-- **output_file** (string, optional): Custom CSV filename. If omitted, a timestamped filename is auto-generated (e.g., `gas_stations_11507_2025-08-19_11-01-12_1.csv`).
-
-### Output
-Results are stored in the Actor dataset and a CSV file is written to the run storage. The dataset schema includes the following key fields:
-
-- `id`, `name`, `distance`, `priceUnit`, `ratingsCount`, `starRating`
-- Address: `address_line1`, `address_line2`, `address_locality`, `address_region`, `address_postalCode`
-- Prices: `price_cash`, `price_cash_postedTime`, `price_credit`, `price_credit_postedTime`
-
-Sample dataset item:
+### By coordinates
+Paste GPS coordinates straight from a map.
 ```json
 {
-  "id": 123456,
-  "name": "USA",
-  "distance": 1.2,
-  "priceUnit": "USD/GAL",
-  "ratingsCount": 65,
-  "starRating": 4.5,
-  "address_line1": "222-33 Braddock Ave",
-  "address_line2": null,
-  "address_locality": "Queens Village",
-  "address_region": "NY",
-  "address_postalCode": "11428",
-  "price_cash": 2.85,
-  "price_cash_postedTime": "2025-08-19T10:58:00Z",
-  "price_credit": 2.95,
-  "price_credit_postedTime": "2025-08-19T10:58:00Z"
+  "search": "36.0816642, -115.0534345",
+  "fuel": 1
 }
 ```
 
-CSV export
-- A CSV is always written. Control the name via `output_file`, otherwise a timestamped default is used.
-- Columns include: `id,name,distance,priceUnit,ratingsCount,starRating,address_line1,address_line2,address_locality,address_region,address_postalCode,price_credit,price_credit_postedTime,price_cash,price_cash_postedTime`.
+## Input Parameters
 
-### Support
-- First, check your run logs in the **Apify Console** for diagnostics.  
-- If you need help, open a discussion and we will try to respond as quickly as possible.  Please include your run ID so we can quickly review the issue.
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `search` | `string` | Yes | - | Location query: ZIP code, city name, or `lat, lng` coordinates. |
+| `fuel` | `integer` | No | `1` | Fuel type: `1` Regular, `2` Midgrade, `3` Premium, `4` Diesel, `5` E85, `12` Unleaded 88. |
+| `lang` | `string` | No | `en` | Language code for localized fields (only `en` is currently supported). |
+| `maxAge` | `integer` | No | `0` | Maximum age of price data in days. `0` returns all stations regardless of when prices were reported. |
+| `output_file` | `string` | No | (none) | Optional CSV filename; a timestamped name is generated if omitted. |
 
-### Roadmap
-1. Brand filtering:  Search by brand or filter by brand name.
-2. More fuel types and payment filters:  Add more fuel types and payment filters.
-3. Price freshness filters by hours:  Add a freshness filter by hours.
-4. Alerts and notifications:  Add alerts and notifications.
-5. Search by distance:  Search by distance.
-6. Business metadata:  Business metadata.
-- category (e.g., gas station vs. convenience store)
-- website URL, phone number
-- opening hours
-- neighborhood field
-- Geo data
-- latitude/longitude fields
-- operational status and ads
-- “temporarily closed” / “permanently closed”
-- “is advertisement” flag
-- reviews and media
-- review distribution (1–5 stars breakdown)
-- individual reviews
-- station images
-7. Output formats:  explicitly export Excel (XLSX) or HTML; we write CSV and dataset items (JSON via Apify dataset export)
-8. Provenance: explicit “scrape timestamp” and “search query used” fields in each record (only price postedTime from source, not scrape time)
+## Output Format
 
-[**Made with ❤️**](https://apify.com/johnvc?fpr=9n7kx3)
+One station per dataset item. A real result for ZIP `11507`:
 
-*Transform your search automation with the most reliable and efficient Fuel and Gasoline price scraper available.*
+```json
+{
+  "id": "56437",
+  "name": "Sunoco",
+  "distance": null,
+  "priceUnit": "dollars_per_gallon",
+  "ratingsCount": 45,
+  "starRating": 4.4,
+  "address_line1": "993 Willis Ave",
+  "address_line2": "",
+  "address_locality": "Albertson",
+  "address_region": "NY",
+  "address_postalCode": "11507",
+  "price_credit": 4.47,
+  "price_credit_postedTime": "2026-05-28T10:04:12.551Z",
+  "price_cash": 4.25,
+  "price_cash_postedTime": "2026-05-28T10:04:12.536Z"
+}
+```
+
+---
+
+## Use as an MCP tool
+
+You can load the Fuel Prices API as an MCP tool so assistants call it for you. The MCP server URL preloads just this one Actor:
+
+```
+https://mcp.apify.com/?tools=actors,docs,johnvc/fuelprices
+```
+
+Authenticate with OAuth in the browser when offered, or with your Apify API token (the same `APIFY_API_TOKEN` used by the Python example). Get a token at https://console.apify.com/settings/integrations and a free Apify account at https://apify.com?fpr=9n7kx3 .
+
+## Install in Claude Cowork Desktop
+
+![Install in Claude Cowork Desktop](https://raw.githubusercontent.com/johnisanerd/ApifyPublicData/main/assets/guides/install_mcp_into_claude_desktop.png)
+
+Cowork is the desktop app's automation mode. To give it the Fuel Prices API as a tool, add the Apify MCP server as a connector.
+
+1. Open the Claude desktop app and go to **Settings → Connectors** (or **Settings → Developer → Edit Config** to edit `claude_desktop_config.json` directly).
+   - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+   - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+2. Add the Apify MCP server, preloaded with only this Actor:
+
+```json
+{
+  "mcpServers": {
+    "apify": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.apify.com/?tools=actors,docs,johnvc/fuelprices"
+      ]
+    }
+  }
+}
+```
+
+3. Restart the app. When Cowork first calls the tool, complete the OAuth prompt in your browser, or add your Apify API token in the connector settings to skip OAuth.
+4. In a Cowork chat, confirm the tool is available and ask it to run the Fuel Prices API.
+
+Download the desktop app and start a free trial: https://claude.ai/referral/uIlpa7nPLg
+More help: https://docs.apify.com/platform/integrations/claude-desktop
+
+## Install in Claude Code
+
+![Install in Claude Code](https://raw.githubusercontent.com/johnisanerd/ApifyPublicData/main/assets/guides/install_mcp_into_claude_code.png)
+
+Claude Code is the command-line tool. Add the Actor's MCP server with one command:
+
+```bash
+claude mcp add --transport http apify \
+  "https://mcp.apify.com/?tools=actors,docs,johnvc/fuelprices"
+```
+
+To use a token instead of browser OAuth:
+
+```bash
+claude mcp add --transport http apify \
+  "https://mcp.apify.com/?tools=actors,docs,johnvc/fuelprices" \
+  --header "Authorization: Bearer YOUR_APIFY_TOKEN"
+```
+
+Then verify with `claude mcp list`, or run `/mcp` inside a session. Ask Claude Code to call the Fuel Prices API.
+
+Try Claude Code free: https://claude.ai/referral/uIlpa7nPLg
+Claude Code MCP docs: https://code.claude.com/docs/en/mcp
+
+## Install in Claude (website)
+
+![Install in Claude (website)](https://raw.githubusercontent.com/johnisanerd/ApifyPublicData/main/assets/guides/install_mcp_into_claude_ai.png)
+
+On claude.ai you add Apify as a connector, then enable just this Actor's tool.
+
+1. Go to **Settings → Connectors → Browse connectors** and search for **Apify MCP server**. Install it (enable or update if prompted).
+2. When connecting, authenticate with your Apify API token, and enable the tool `johnvc/fuelprices`.
+3. In any chat, open **+ → Connectors** and turn on **Apify**.
+4. Alternatively, choose **Add custom connector** and paste the full MCP URL `https://mcp.apify.com/?tools=actors,docs,johnvc/fuelprices`, using OAuth when prompted.
+5. Ask Claude to run the Fuel Prices API.
+
+Open Claude on the web: https://claude.ai
+
+## Install in Cursor
+
+![Install in Cursor](https://raw.githubusercontent.com/johnisanerd/ApifyPublicData/main/assets/guides/install_mcp_into_cursor.png)
+
+Cursor reads MCP servers from a project file at `.cursor/mcp.json`.
+
+1. In your project, create `.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "apify": {
+      "url": "https://mcp.apify.com/?tools=actors,docs,johnvc/fuelprices"
+    }
+  }
+}
+```
+
+2. If you prefer token auth over browser OAuth, add a header:
+
+```json
+{
+  "mcpServers": {
+    "apify": {
+      "url": "https://mcp.apify.com/?tools=actors,docs,johnvc/fuelprices",
+      "headers": { "Authorization": "Bearer YOUR_APIFY_TOKEN" }
+    }
+  }
+}
+```
+
+3. Open **Cursor → Settings → MCP** and confirm the **apify** server is connected (green dot).
+4. In Composer or Chat, ask Cursor to call the Fuel Prices API.
+
+New to Cursor? Get it here: https://cursor.com/referral?code=XQP4VBLI3NNX
+
+## Install in ChatGPT
+
+![Install in ChatGPT](https://raw.githubusercontent.com/johnisanerd/ApifyPublicData/main/assets/guides/install_mcp_into_ChatGPT.png)
+
+ChatGPT connects to the Apify MCP server through Developer mode (available on ChatGPT Pro, Plus, Business, Enterprise, and Education plans).
+
+1. Click your profile icon, then go to **Settings > Apps**. If you do not see a **Create app** button, open **Advanced settings** and enable **Developer mode**.
+2. Click **Create app** and fill out the form:
+   - **Name:** Apify
+   - **MCP Server URL:** `https://mcp.apify.com/?tools=actors,docs,johnvc/fuelprices`
+   - **Authentication:** OAuth
+3. Click **Create** and authorize the connection with Apify.
+4. To use the app in a conversation, click **+** in the chat, choose **Developer mode**, and select **Apify**.
+
+More help: https://docs.apify.com/platform/integrations/mcp
+
+---
+
+[**Made with care**](https://apify.com/johnvc?fpr=9n7kx3)
+
+*Use the Fuel Prices API to power price monitoring, comparison apps, and analytics with reliable, structured results.*
+
 Last Updated: 2026.05.29
