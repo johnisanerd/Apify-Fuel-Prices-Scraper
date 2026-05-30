@@ -282,4 +282,4 @@ More help: https://docs.apify.com/platform/integrations/mcp
 
 *Use the Fuel Prices API to power price monitoring, comparison apps, and analytics with reliable, structured results.*
 
-Last Updated: 2026.05.30
+Last Updated: 2026.05.31
