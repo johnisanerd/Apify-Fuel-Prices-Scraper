@@ -276,6 +276,10 @@ ChatGPT connects to the Apify MCP server through Developer mode (available on Ch
 
 More help: https://docs.apify.com/platform/integrations/mcp
 
+## n8n integration
+
+Available as an n8n community node, **[n8n-nodes-fuel-prices-api](https://www.npmjs.com/package/n8n-nodes-fuel-prices-api)**. In n8n, open Settings, Community Nodes, install `n8n-nodes-fuel-prices-api`, then use the Fuel Prices node in any workflow (it also works as an AI Agent tool).
+
 ---
 
 [**Made with care**](https://apify.com/johnvc?fpr=9n7kx3)
