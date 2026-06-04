@@ -286,4 +286,4 @@ Available as an n8n community node, **[n8n-nodes-fuel-prices-api](https://www.np
 
 *Use the Fuel Prices API to power price monitoring, comparison apps, and analytics with reliable, structured results.*
 
-Last Updated: 2026.06.04
+Last Updated: 2026.06.05
