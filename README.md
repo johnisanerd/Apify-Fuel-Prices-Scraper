@@ -286,4 +286,12 @@ Available as an n8n community node, **[n8n-nodes-fuel-prices-api](https://www.np
 
 *Use the Fuel Prices API to power price monitoring, comparison apps, and analytics with reliable, structured results.*
 
-Last Updated: 2026.06.10
+## Featured Tasks
+
+Ready-to-run examples that show this API solving a specific problem. Each opens its own setup so you can run it on your account in one click.
+
+- [Find live gas prices in any US city by fuel type](https://apify.com/johnvc/fuelprices/examples/find-live-gas-prices-in-any-us-city-by-fuel-type?fpr=9n7kx3) - Search any US city and get one row per station with name, full address, distance, cash and credit prices, and ratings.
+- [Find gas prices near GPS map coordinates](https://apify.com/johnvc/fuelprices/examples/find-gas-prices-near-gps-map-coordinates?fpr=9n7kx3) - Paste latitude and longitude from a map and get nearby stations with prices, distance, and ratings.
+- [Find gas station prices by ZIP code](https://apify.com/johnvc/fuelprices/examples/find-gas-station-prices-by-zip-code?fpr=9n7kx3) - Look up stations for any US ZIP code with full address, cash and credit prices, and ratings.
+
+Last Updated: 2026.06.17
