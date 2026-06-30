@@ -294,4 +294,4 @@ Ready-to-run examples that show this API solving a specific problem. Each opens 
 - [Find gas prices near GPS map coordinates](https://apify.com/johnvc/fuelprices/examples/find-gas-prices-near-gps-map-coordinates?fpr=9n7kx3) - Paste latitude and longitude from a map and get nearby stations with prices, distance, and ratings.
 - [Find gas station prices by ZIP code](https://apify.com/johnvc/fuelprices/examples/find-gas-station-prices-by-zip-code?fpr=9n7kx3) - Look up stations for any US ZIP code with full address, cash and credit prices, and ratings.
 
-Last Updated: 2026.06.29
+Last Updated: 2026.06.30
