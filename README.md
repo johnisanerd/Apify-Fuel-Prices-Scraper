@@ -294,4 +294,15 @@ Ready-to-run examples that show this API solving a specific problem. Each opens 
 - [Find gas prices near GPS map coordinates](https://apify.com/johnvc/fuelprices/examples/find-gas-prices-near-gps-map-coordinates?fpr=9n7kx3) - Paste latitude and longitude from a map and get nearby stations with prices, distance, and ratings.
 - [Find gas station prices by ZIP code](https://apify.com/johnvc/fuelprices/examples/find-gas-station-prices-by-zip-code?fpr=9n7kx3) - Look up stations for any US ZIP code with full address, cash and credit prices, and ratings.
 
+<!-- ask-ai:start -->
+## 🤖 Ask an AI assistant about this Actor
+
+Open a ready-to-send prompt about the Fuel Prices API in the AI of your choice:
+
+- 💬 [ChatGPT](https://chatgpt.com/?q=Using%20the%20Fuel%20Prices%20API%20on%20Apify%20%28https://apify.com/johnvc/fuelprices?fpr=9n7kx3%29%2C%20walk%20me%20through%20this%20use%20case:%20%22Find%20gas%20station%20prices%20by%20ZIP%20code%22.%20Show%20me%20the%20input%20JSON%2C%20the%20output%20fields%2C%20and%20how%20to%20automate%20it%20with%20the%20API%20or%20MCP.)
+- 🧠 [Claude](https://claude.ai/new?q=Using%20the%20Fuel%20Prices%20API%20on%20Apify%20%28https://apify.com/johnvc/fuelprices?fpr=9n7kx3%29%2C%20walk%20me%20through%20this%20use%20case:%20%22Find%20gas%20station%20prices%20by%20ZIP%20code%22.%20Show%20me%20the%20input%20JSON%2C%20the%20output%20fields%2C%20and%20how%20to%20automate%20it%20with%20the%20API%20or%20MCP.)
+- 🔍 [Perplexity](https://www.perplexity.ai/search?q=Using%20the%20Fuel%20Prices%20API%20on%20Apify%20%28https://apify.com/johnvc/fuelprices?fpr=9n7kx3%29%2C%20walk%20me%20through%20this%20use%20case:%20%22Find%20gas%20station%20prices%20by%20ZIP%20code%22.%20Show%20me%20the%20input%20JSON%2C%20the%20output%20fields%2C%20and%20how%20to%20automate%20it%20with%20the%20API%20or%20MCP.)
+- 🅒 [Copilot](https://copilot.microsoft.com/?q=Using%20the%20Fuel%20Prices%20API%20on%20Apify%20%28https://apify.com/johnvc/fuelprices?fpr=9n7kx3%29%2C%20walk%20me%20through%20this%20use%20case:%20%22Find%20gas%20station%20prices%20by%20ZIP%20code%22.%20Show%20me%20the%20input%20JSON%2C%20the%20output%20fields%2C%20and%20how%20to%20automate%20it%20with%20the%20API%20or%20MCP.)
+<!-- ask-ai:end -->
+
 Last Updated: 2026.09.22
